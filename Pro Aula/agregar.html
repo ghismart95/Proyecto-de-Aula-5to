@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agregar producto</title>
+<link rel="icon" href="img/icon.jpg" type="image/jpeg">
+</head>
+<body>
+  <h2>Agregar Producto</h2>
+
+  <form id="formAgregar">
+    <label for="codigo">Cod. Producto:</label> <!-- Agregado el campo para el código de producto -->
+    <input type="text" id="codigo" required><br><br>
+    
+    <label for="producto">Nombre del Producto:</label>
+    <input type="text" id="producto" required><br><br>
+    
+    <label for="cantidad">Cantidad:</label>
+    <input type="number" id="cantidad" required><br><br>
+    
+    <label for="precio">Precio:</label>
+    <input type="text" id="precio" required><br><br>
+    
+    <button type="button" onclick="agregarProducto()">Agregar</button>
+    <button type="button" onclick="regresar()">Regresar</button>
+  </form>
+
+  <script>
+    function agregarProducto() {
+      let codigo = document.getElementById('codigo').value; // Obtener el código de producto
+      let producto = document.getElementById('producto').value;
+      let cantidad = document.getElementById('cantidad').value;
+      let precio = document.getElementById('precio').value;
+  
+      let nuevoProducto = { codigo, producto, cantidad, precio }; // Incluyendo el código en el nuevo producto
+      if (producto === '' || cantidad === '' || precio === '' || codigo === '') {
+        alert('Por favor, complete todos los campos.');
+        return;
+      }
+      // Crear un nuevo objeto de producto
+  
+      // Obtener el inventario actual del almacenamiento local
+      let inventario = JSON.parse(localStorage.getItem('inventario')) || [];
+  
+      // Agregar el nuevo producto al inventario
+      inventario.push(nuevoProducto);
+  
+      // Guardar el inventario actualizado en el almacenamiento local
+      localStorage.setItem('inventario', JSON.stringify(inventario));
+  
+      // Redirigir de nuevo a la página principal
+      window.location.href = 'inv.html';
+  
+    }
+  
+    function regresar() {
+      // Redirigir a la página principal
+      window.location.href = 'inv.html';
+    }
+  </script>
+  
+</body>
+</html>

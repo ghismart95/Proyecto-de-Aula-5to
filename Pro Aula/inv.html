@@ -1,89 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inventario de Farmacia</title>
-<style>
-  body { font-family: Arial, sans-serif; }
-  table { width: 100%; border-collapse: collapse; }
-  th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-  th { background-color: #f2f2f2; }
-  #formAgregar { margin-bottom: 20px; }
-</style>
+  <link rel="stylesheet" href="styles2.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario de Farmacia</title>
+  <link rel="icon" href="img/icon.jpg" type="image/jpeg">
 </head>
 <body>
-
+  
 <h2>Inventario de Farmacia</h2>
 
-<form id="formAgregar">
-  <input type="text" id="producto" placeholder="Nombre del producto" required>
-  <input type="number" id="cantidad" placeholder="Cantidad" required>
-  <input type="text" id="precio" placeholder="Precio" required>
+<!-- Menú desplegable del perfil del administrador -->
+<div class="dropdown">
+  <button class="dropbtn">Perfil de Administrador</button>
+  <div class="dropdown-content">
+    <p>Nombre de Usuario: Admin</p>
+    <p>Email: admin@example.com</p>
+    <p>Teléfono: 123456789</p>
+    <a href="index.html">Exit</a> <!-- Botón de exit -->
+  </div>
+</div>
+
+<form id="formAgregar" action="agregar.html">
   <button type="submit">Agregar Producto</button>
 </form>
 
 <table id="inventario">
   <tr>
+    <th>Codigo</th> <!-- Nuevo dato añadido -->
     <th>Producto</th>
     <th>Cantidad</th>
     <th>Precio</th>
+    <th>Estado</th>
     <th>Acciones</th>
   </tr>
   <!-- Los productos se añadirán aquí dinámicamente -->
 </table>
 
 <script>
-// Ejemplo de datos de inventario
-let inventario = [
-  { producto: 'Paracetamol', cantidad: 100, precio: '$1200' },
-  { producto: 'Ibuprofeno', cantidad: 50, precio: '$2000' },
-  // Añade más productos aquí
-];
+document.addEventListener('DOMContentLoaded', function() {
+  actualizarInventario();
+});
 
+// Función para actualizar la tabla del inventario
 function actualizarInventario() {
   const tabla = document.getElementById('inventario');
   // Limpiar la tabla antes de actualizar
   tabla.innerHTML = `
     <tr>
+      <th>Codigo</th> <!-- Nuevo dato añadido -->
       <th>Producto</th>
       <th>Cantidad</th>
       <th>Precio</th>
+      <th>Estado</th>
       <th>Acciones</th>
     </tr>
   `;
+  // Obtener el inventario del almacenamiento local
+  let inventario = JSON.parse(localStorage.getItem('inventario')) || [];
   inventario.forEach((item, index) => {
     let fila = tabla.insertRow();
-    let celdaProducto = fila.insertCell(0);
-    let celdaCantidad = fila.insertCell(1);
-    let celdaPrecio = fila.insertCell(2);
-    let celdaAcciones = fila.insertCell(3);
+    let celdaCodigo = fila.insertCell(0); // Nueva celda para el código de producto
+    let celdaProducto = fila.insertCell(1);
+    let celdaCantidad = fila.insertCell(2);
+    let celdaPrecio = fila.insertCell(3);
+    let celdaEstado = fila.insertCell(4);
+    let celdaAcciones = fila.insertCell(5);
+    celdaCodigo.innerHTML = item.codigo; // Asegúrate de cambiar item.codigo por el campo correcto en tus datos
     celdaProducto.innerHTML = item.producto;
     celdaCantidad.innerHTML = item.cantidad;
     celdaPrecio.innerHTML = item.precio;
-    celdaAcciones.innerHTML = `<button onclick="eliminarProducto(${index})">Eliminar</button>`;
+    celdaEstado.innerHTML = item.cantidad > 0 ? 'Disponible' : 'Agotado';
+    // Estilos para los botones en la tabla
+    celdaAcciones.innerHTML = `
+      <div style="text-align: center;">
+        <button onclick="editarProducto(${index})">Editar</button>
+      </div>
+    `;
   });
 }
 
-function agregarProducto(e) {
-  e.preventDefault();
-  let producto = document.getElementById('producto').value;
-  let cantidad = document.getElementById('cantidad').value;
-  let precio = document.getElementById('precio').value;
-  inventario.push({ producto, cantidad, precio });
-  actualizarInventario();
-  e.target.reset(); // Resetear el formulario
+// Esta función será llamada al hacer clic en el botón "Editar"
+function editarProducto(index) {
+  // Guardar el índice del producto a editar en el almacenamiento local
+  localStorage.setItem('productoIndex', index);
+  // Redirecciona a la página de detalles del producto
+  window.location.href = 'detalleP.html';
 }
-
-function eliminarProducto(index) {
-  inventario.splice(index, 1);
-  actualizarInventario();
-}
-
-document.getElementById('formAgregar').addEventListener('submit', agregarProducto);
-
-// Llamada a la función para actualizar la tabla con los datos del inventario
-actualizarInventario();
 </script>
 
 </body>

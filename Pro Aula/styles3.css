@@ -1,0 +1,64 @@
+
+/* Estilos para el cuerpo del documento */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estilos para el contenedor principal */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Estilos para el formulario */
+  .form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 25rem;
+  }
+  
+  /* Estilos para el título */
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para los campos de entrada */
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  .input-group-text {
+    background-color: #17a2b8;
+    border: none;
+  }
+  
+  .input-group-text img {
+    height: 1rem;
+  }
+  
+  .form-control {
+    border: none;
+  }
+  
+  /* Estilos para el botón */
+  .btn {
+    background-color: #17a2b8;
+    border: none;
+  }
+  
+  .btn:hover {
+    background-color: #138496;
+  }
+body {
+  background-image: url("img/bg.jpg");
+  background-size: cover; /* Para cubrir todo el fondo */
+  background-repeat: no-repeat; /* Para evitar la repetición de la imagen */
+}

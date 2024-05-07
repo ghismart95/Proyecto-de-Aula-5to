@@ -1,0 +1,11 @@
+/* Estilo para ajustar el tamaño de las imágenes */
+.icono {
+    height: 1rem; /* Altura deseada */
+    width: auto; /* Ancho automático para mantener la proporción */
+  }
+  
+  body {
+    background-image: url("img/bg.jpg");
+    background-size: cover; /* Para cubrir todo el fondo */
+    background-repeat: no-repeat; /* Para evitar la repetición de la imagen */
+  }

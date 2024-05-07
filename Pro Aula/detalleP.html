@@ -1,66 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" type="text/css" href="styles1.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Detalle de Producto</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles.css">
+  <title>Editar detalles del producto</title>
+  <link rel="icon" href="img/icon.jpg" type="image/jpeg">
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 offset-md-3">
-        <div class="card mt-5">
-          <div class="card-body">
-            <h5 class="card-title">Detalles del Producto</h5>
-            <form>
-              <div class="form-group">
-                <label for="numeroProducto">Número de Producto:</label>
-                <input type="text" class="form-control" id="numeroProducto" value="12345">
-              </div>
-              <div class="form-group">
-                <label for="idProducto">ID de Producto:</label>
-                <input type="text" class="form-control" id="idProducto" value="ABC123">
-              </div>
-              <div class="form-group">
-                <label for="nombreProducto">Nombre del Producto:</label>
-                <input type="text" class="form-control" id="nombreProducto" value="Producto de Ejemplo">
-              </div>
-              <div class="form-group">
-                <label for="estadoProducto">Estado:</label>
-                <input type="text" class="form-control" id="estadoProducto" value="Disponible">
-              </div>
-              <div class="form-group">
-                <label for="descripcionProducto">Descripción:</label>
-                <textarea class="form-control" id="descripcionProducto" rows="3">Esta es una descripción de ejemplo del producto.</textarea>
-              </div>
-              <div class="form-group">
-                <label for="descuentoProducto">Descuento:</label>
-                <input type="text" class="form-control" id="descuentoProducto" value="10%">
-              </div>
-              <div class="form-group">
-                <label for="cantidadProducto">Cantidad:</label>
-                <input type="number" class="form-control" id="cantidadProducto" value="1">
-              </div>
-              <div class="form-group">
-                <label for="precioProducto">Precio Unitario:</label>
-                <input type="text" class="form-control" id="precioProducto" value="$50.00">
-              </div>
-              <div class="form-group">
-                <label for="stockProducto">Stock Total:</label>
-                <input type="number" class="form-control" id="stockProducto" value="100">
-              </div>
-              <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="submit" class="btn btn-primary">Agregar</button>
-                <button type="button" class="btn btn-secondary">Actualizar</button>
-                <button type="button" class="btn btn-danger">Eliminar</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <h2>Editar detalles del Producto</h2>
+
+  <form id="formEditar">
+    <label for="codProducto">Cod. Producto:</label>
+    <input type="number" id="codProducto" required><br><br>
+
+    <label for="nombreProducto">Nombre del Producto:</label>
+    <input type="text" id="nombreProducto" required><br><br>
+    
+    <label for="cantidadProducto">Cantidad:</label>
+    <input type="number" id="cantidadProducto" required><br><br>
+    
+    <label for="precioProducto">Precio Unitario:</label>
+    <input type="text" id="precioProducto" required><br><br>
+    
+    <button type="button" onclick="actualizarProducto()">Actualizar</button>
+    <button type="button" onclick="eliminarProducto()">Eliminar</button>
+    <button type="button" onclick="regresar()">Regresar</button> <!-- Botón de regresar -->
+  </form>
+
+  <script>
+    // Obtener el índice del producto a editar
+    let productoIndex = localStorage.getItem('productoIndex');
+
+    // Obtener el inventario actual del almacenamiento local
+    let inventario = JSON.parse(localStorage.getItem('inventario'));
+
+    // Obtener el producto a editar según el índice
+    let producto = inventario[productoIndex];
+
+    // Mostrar los detalles del producto en los campos de entrada
+    document.getElementById('codProducto').value = producto.codigo;
+    document.getElementById('nombreProducto').value = producto.producto;
+    document.getElementById('cantidadProducto').value = producto.cantidad;
+    document.getElementById('precioProducto').value = producto.precio;
+ 
+    function actualizarProducto() {
+      // Obtener los valores de los campos
+      let codigo = document.getElementById('codProducto').value;
+      let nombre = document.getElementById('nombreProducto').value;
+      let cantidad = document.getElementById('cantidadProducto').value;
+      let precio = document.getElementById('precioProducto').value;
+
+      // Verificar si algún campo está vacío
+      if (nombre === '' || cantidad === '' || precio === '' || codigo === '') {
+        alert('Por favor, complete todos los campos.');
+        return;
+      }
+
+      // Actualizar el producto en el inventario
+      inventario[productoIndex] = { codigo: codigo, producto: nombre, cantidad: cantidad, precio: precio };
+
+      // Guardar el inventario actualizado en el almacenamiento local
+      localStorage.setItem('inventario', JSON.stringify(inventario));
+
+      // Redirigir de nuevo a la página principal
+      window.location.href = 'inv.html';
+    }
+
+    function eliminarProducto() {
+      // Eliminar el producto del inventario
+      inventario.splice(productoIndex, 1);
+
+      // Guardar el inventario actualizado en el almacenamiento local
+      localStorage.setItem('inventario', JSON.stringify(inventario));
+
+      // Redirigir de nuevo a la página principal
+      window.location.href = 'inv.html';
+    }
+
+    function regresar() {
+      // Redirigir a la página principal
+      window.location.href = 'inv.html';
+    }
+  </script>
 </body>
 </html>

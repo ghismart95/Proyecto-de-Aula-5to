@@ -1,0 +1,140 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+h2 {
+  color: #333;
+  text-decoration-line: overline;
+  margin-top: 2px;
+  margin-bottom: 40px;
+}
+
+#formAgregar {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align:center;
+  width: calc(100% / 6); /* Establecer un ancho igual para cada celda */
+}
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align:center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+#inventario th:first-child,
+#inventario td:first-child {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+#inventario th:last-child,
+#inventario td:last-child {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+#inventario tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#inventario tr:hover {
+  background-color: #ddd;
+}
+
+#inventario button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 6px 10px; /* Ajuste el padding para que los botones se ajusten mejor */
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+#inventario button:hover {
+  background-color: #45a049;
+}
+
+#formAgregar button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.3s;
+}
+
+#formAgregar button:hover {
+  background-color: #45a049;
+}
+
+/* Estilo del menú desplegable */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  float: right;
+  margin-right: 2px;
+  margin-top: -68px;
+}
+
+/* Estilo del botón del menú desplegable */
+.dropbtn {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Estilo del contenido del menú desplegable */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #302c2c;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(68, 67, 67, 0.2);
+  z-index: 1;
+}
+
+/* Estilo de los elementos dentro del contenido del menú desplegable */
+.dropdown-content p,
+.dropdown-content a {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  display: block;
+}
+
+/* Estilo del botón "Exit" */
+.dropdown-content a:last-child {
+  background-color: #333;
+}
+
+/* Estilo del botón "Exit" al pasar el ratón */
+.dropdown-content a:last-child:hover {
+  background-color: #555;
+}
+
+/* Mostrar el contenido del menú desplegable al pasar el ratón */
+.dropdown:hover .dropdown-content {
+  display: block;
+}

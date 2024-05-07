@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  form {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  button + button {
+    margin-left: 10px;
+  }
+  
+  button[type="button"] {
+    background-color: #4CAF50; /* verde para el botón Actualizar */
+  }
+  
+  button[type="button"]:hover {
+    background-color: #45a049; /* Color más oscuro al pasar el ratón */
+  }
+  
+  button[type="button"] + button[type="button"] {
+    background-color: #f44336; /* Botón Eliminar de color rojo */
+  }
+  
+  button[type="button"] + button[type="button"]:hover {
+    background-color: #da190b; /* Color más oscuro al pasar el ratón */
+  }
+  
+  button[type="button"] + button[type="button"] + button[type="button"] {
+    background-color: #87ceeb; /* Botón Regresar de color azul claro */
+  }
+  
+  button[type="button"] + button[type="button"] + button[type="button"]:hover {
+    background-color: #5f9ea0; /* Color más oscuro al pasar el ratón */
+  }
+  body {
+    background-image: url("img/Fonddo.png");
+    background-size: cover; /* Para cubrir todo el fondo */
+    background-repeat: no-repeat; /* Para evitar la repetición de la imagen */
+  }

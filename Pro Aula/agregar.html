@@ -12,15 +12,25 @@
 
   <form id="formAgregar">
     <label for="codigo">Cod. Producto:</label> <!-- Agregado el campo para el código de producto -->
-    <input type="text" id="codigo" required><br><br>
+    <input type="text" id="codigo" name="codigo" required><br><br>
+    
     <label for="producto">Nombre del Producto:</label>
-    <input type="text" id="producto" required><br><br>
+    <input type="text" id="producto" name="nombre" required><br><br>
     
     <label for="cantidad">Cantidad:</label>
-    <input type="number" id="cantidad" required><br><br>
+    <input type="number" id="cantidad" name="cantidad" required><br><br>
     
     <label for="precio">Precio:</label>
-    <input type="text" id="precio" required><br><br>
+    <input type="text" id="precio" name="precio" required><br><br>
+    
+    <label for="descripcion">Descripción:</label><br>
+    <textarea id="descripcion" name="descripcion" rows="4" cols="50" required></textarea><br><br>
+    
+    <label for="fechacompra">Fecha de Compra:</label>
+    <input type="date" id="fechacompra" name="fechacompra" required><br><br>
+    
+    <label for="fechaVencimiento">Fecha de Vencimiento:</label>
+    <input type="date" id="fechaVencimiento" name="fechaVencimiento" required><br><br>
     
     <button type="button" onclick="agregarProducto()">Agregar</button>
     <button type="button" onclick="regresar()">Regresar</button>
@@ -32,26 +42,33 @@
       let producto = document.getElementById('producto').value;
       let cantidad = document.getElementById('cantidad').value;
       let precio = document.getElementById('precio').value;
-  
-      let nuevoProducto = { codigo, producto, cantidad, precio }; // Incluyendo el código en el nuevo producto
-      if (producto === '' || cantidad === '' || precio === '' || codigo === '') {
+      let descripcion = document.getElementById('descripcion').value;
+      let fechacompra = document.getElementById('fechacompra').value;
+      let fechaVencimiento = document.getElementById('fechaVencimiento').value;
+
+      // Verificar campos vacíos
+      if (producto === '' || cantidad === '' || precio === '' || codigo === '' || descripcion === '' || fechacompra === '' || fechaVencimiento === '') {
         alert('Por favor, complete todos los campos.');
         return;
       }
-      // Crear un nuevo objeto de producto
-  
+
+      // Crear objeto de producto
+      let nuevoProducto = { codigo, producto, cantidad, precio, fechacompra }; // Incluir la fecha de compra
+
+      // Crear objeto de detalle de producto
+      let detalleProducto = { codigo, producto, cantidad, precio, descripcion, fechacompra, fechaVencimiento }; // Guardar todos los datos para la tabla de descripcion.html
+
       // Obtener el inventario actual del almacenamiento local
       let inventario = JSON.parse(localStorage.getItem('inventario')) || [];
-  
       // Agregar el nuevo producto al inventario
       inventario.push(nuevoProducto);
-  
       // Guardar el inventario actualizado en el almacenamiento local
       localStorage.setItem('inventario', JSON.stringify(inventario));
-  
-      // Redirigir de nuevo a la página principal
+
+      // Guardar el detalle del nuevo producto en el almacenamiento local usando el código como clave
+      localStorage.setItem('detalleProducto_' + codigo, JSON.stringify(detalleProducto));
+      
       window.location.href = 'inv.html';
-  
     }
   
     function regresar() {
